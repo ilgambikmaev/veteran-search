@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Сервис анализа информации о ветеранах</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-image: url('https://i.ibb.co/YbcVvt8/paper-bg.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center px-4">
+  <div class="bg-white/70 backdrop-blur p-6 rounded-xl shadow-xl w-full max-w-md">
+    <h1 class="text-2xl font-bold text-center mb-4">Сервис анализа информации о ветеранах</h1>
+    <form id="searchForm" class="space-y-4">
+      <input type="text" id="lastName" placeholder="Фамилия" required class="w-full p-2 border rounded">
+      <input type="text" id="firstName" placeholder="Имя" class="w-full p-2 border rounded">
+      <input type="text" id="middleName" placeholder="Отчество" class="w-full p-2 border rounded">
+      <button type="submit" class="w-full bg-gray-700 text-white py-2 rounded hover:bg-gray-800">Поиск</button>
+    </form>
+  </div>
+  <script>
+    document.getElementById('searchForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const ln = document.getElementById('lastName').value.trim();
+      const fn = document.getElementById('firstName').value.trim();
+      const mn = document.getElementById('middleName').value.trim();
+      const params = new URLSearchParams({ ln, fn, mn });
+      window.location.href = `results.html?${params.toString()}`;
+    });
+  </script>
+</body>
+</html>
