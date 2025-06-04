@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Результаты поиска</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-image: url('https://i.ibb.co/YbcVvt8/paper-bg.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  </style>
+</head>
+<body class="min-h-screen px-4 py-6">
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-xl font-semibold text-center mb-6">Сервис анализа информации о ветеранах</h1>
+    <form id="searchForm" class="grid grid-cols-1 sm:grid-cols-4 gap-2 mb-6">
+      <input type="text" id="lastName" placeholder="Фамилия" class="p-2 border rounded">
+      <input type="text" id="firstName" placeholder="Имя" class="p-2 border rounded">
+      <input type="text" id="middleName" placeholder="Отчество" class="p-2 border rounded">
+      <button type="submit" class="bg-gray-700 text-white rounded py-2 hover:bg-gray-800">Поиск</button>
+    </form>
+    <div id="resultsContainer" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+  </div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const ln = params.get('ln') || '';
+    const fn = params.get('fn') || '';
+    const mn = params.get('mn') || '';
+
+    document.getElementById('lastName').value = ln;
+    document.getElementById('firstName').value = fn;
+    document.getElementById('middleName').value = mn;
+
+    const veterans = [
+      { id: 1, name: 'Ячников Алексей Семёнович', years: '1908–1989', img: 'https://via.placeholder.com/150' },
+      { id: 2, name: 'Ячников Антон Семёнович', years: '1918–1944', img: 'https://via.placeholder.com/150' },
+      { id: 3, name: 'Шмелков Николай Александрович', years: '1924–1944', img: 'https://via.placeholder.com/150' }
+    ];
+
+    const filtered = veterans.filter(v =>
+      (!ln || v.name.includes(ln)) &&
+      (!fn || v.name.includes(fn)) &&
+      (!mn || v.name.includes(mn))
+    );
+
+    const container = document.getElementById('resultsContainer');
+    if (filtered.length === 0) {
+      container.innerHTML = '<p class="text-center">Ничего не найдено.</p>';
+    } else {
+      filtered.forEach(v => {
+        const card = document.createElement('div');
+        card.className = 'bg-white/70 backdrop-blur rounded shadow p-3 text-center cursor-pointer hover:shadow-lg';
+        card.innerHTML = `
+          <img src="${v.img}" alt="${v.name}" class="mx-auto mb-2 rounded">
+          <h2 class="font-semibold">${v.name}</h2>
+          <p class="text-sm">${v.years}</p>
+        `;
+        card.onclick = () => window.location.href = `veteran.html?id=${v.id}`;
+        container.appendChild(card);
+      });
+    }
+
+    document.getElementById('searchForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const ln = document.getElementById('lastName').value.trim();
+      const fn = document.getElementById('firstName').value.trim();
+      const mn = document.getElementById('middleName').value.trim();
+      const params = new URLSearchParams({ ln, fn, mn });
+      window.location.href = `results.html?${params.toString()}`;
+    });
+  </script>
+</body>
+</html>
