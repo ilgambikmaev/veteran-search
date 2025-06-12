@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Детали ветерана</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html, body { height: 100%%; }
+    body {
+      background: url('{% static "background.jpg" %}') no-repeat center center fixed;
+      background-size: cover;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+  <div class="bg-white/80 backdrop-blur p-6 rounded-xl shadow max-w-md w-full">
+    <a href="/results/" class="mb-4 block text-sm text-blue-600 hover:underline">← Назад</a>
+    <div class="text-center">
+      <img src="{% static 'photo1.jpg' %}" class="mx-auto mb-4 rounded">
+      <h2 class="text-xl font-bold">Кармин Николай Анатольевич</h2>
+      <p class="text-sm">1910 – наст. время</p>
+      <div class="mt-4 text-left text-sm">
+        <p><strong>Биография:</strong> Родился 26 мая 1910 года в Челябинской области</p>
+        <p class="mt-2"><strong>Дополнительно:</strong> Проживал в г. Челябинск, бабушка учила живописи, воевал на Курской дуге</p>
+        <p class="mt-2"><strong>Источники:</strong> Архив, военный билет</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

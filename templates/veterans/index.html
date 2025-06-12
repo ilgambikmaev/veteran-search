@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Поиск ветеранов</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html, body { height: 100%%; }
+    body {
+      background: url('{% static "background.jpg" %}') no-repeat center center fixed;
+      background-size: cover;
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center p-4 min-h-screen">
+  <div class="bg-white/80 backdrop-blur p-6 rounded-xl shadow max-w-md w-full text-center">
+    <h1 class="text-xl font-bold mb-4">Сервис анализа информации о ветеранах</h1>
+    <form action="/results/" method="get" class="space-y-2">
+      <input type="text" name="last_name" placeholder="Фамилия" class="w-full p-2 border rounded">
+      <input type="text" name="first_name" placeholder="Имя" class="w-full p-2 border rounded">
+      <input type="text" name="patronymic" placeholder="Отчество" class="w-full p-2 border rounded">
+      <button type="submit" class="w-full bg-gray-800 text-white py-2 rounded">Поиск</button>
+    </form>
+  </div>
+</body>
+</html>

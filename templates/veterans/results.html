@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Результаты поиска</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html, body { height: 100%%; }
+    body {
+      background: url('{% static "background.jpg" %}') no-repeat center center fixed;
+      background-size: cover;
+    }
+  </style>
+</head>
+<body class="min-h-screen p-4">
+  <div class="text-center max-w-4xl mx-auto">
+    <h1 class="text-xl font-bold mb-4">Сервис анализа информации о ветеранах</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      {% for vet in veterans %}
+        <a href="/veteran/{{ vet.id }}/" class="block bg-white/80 backdrop-blur rounded-xl p-4 text-center shadow hover:shadow-lg transition">
+          <img src="{% static vet.img %}" class="mx-auto mb-2 rounded max-h-48">
+          <div class="font-semibold">{{ vet.name }}</div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+</html>
